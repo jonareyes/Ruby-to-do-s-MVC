@@ -12,21 +12,24 @@ end
 class ManipulateTask
 
 	def create_csv
-		task1 = Task.new('Comprar manzanas rojas')
-		task2 = Task.new('Lavar la ropa')
-		task3 = Task.new('Convertirme en un Developer Rock Star')
+		task_array = []
+		task_array << Task.new('Comprar manzanas rojas')
+		task_array << Task.new('Lavar la ropa')
+		task_array << Task.new('Convertirme en un Developer Rock Star')
 
 		CSV.open("tarea.csv", "wb") do |csv|
-				csv << [task1.name]
-				csv << [task2.name]
-				csv << [task3.name]
-
+				task_array.each do |task|
+				  csv << [task.name, task.complete]
+				end			
 		end
 	end
 
-	# def add_to_list
-
-		
-	# end
+	def return_index
+		task_array = []
+		CSV.foreach('tarea.csv') do |row|
+  			task_array << Task.new(row[0], row[1])
+    end
+    task_array
+	end
 end
 

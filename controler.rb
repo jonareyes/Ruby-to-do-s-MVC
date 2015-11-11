@@ -9,6 +9,7 @@ class AllController
     @argv = argv[0]
     # select(@argv)
 		start
+    index
 	end
 
   def select(command)
@@ -19,16 +20,24 @@ class AllController
       add
     when command.match(/delete/)
       delete
+    when comman.match(/complete/)
+      complete
     end
   end
       
 	def start
 		@model.create_csv
-		@view.task_complete	
+		@view.index
 	end
 
   def index
-    @view.task_complete
+
+     tasks = @model.task_array
+
+
+    # array de objetos task
+
+    @view.index
   end
 end
 
